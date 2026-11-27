@@ -191,6 +191,10 @@ En Windows:
 
 Las pruebas unitarias cubren creación de eventos, prevención de documentos duplicados, emisión de entradas, códigos repetidos, recursos inexistentes y uso único de entradas QR. Además, las **pruebas de integración con MockMvc y SQLite** recorren los endpoints HTTP: CRUD de eventos; entradas General, VIP y QR; actualización de precios; relaciones y restricciones de eliminación; documentos y CUIT duplicados; validaciones y respuestas 400, 404 y 409. Una prueba adicional verifica que Spring Boot inicia correctamente. GitHub Actions ejecuta `mvnw verify` en cada cambio.
 
+### Verificación manual
+
+El **27 de noviembre de 2026** se ejecutó en Postman el recorrido completo de la colección contra la API iniciada localmente con Spring Boot y SQLite. Resultado: **19 solicitudes HTTP verificadas, 19 pruebas aprobadas, 0 fallos y 0 errores**, incluidas las respuestas 400 y 409 esperadas para comprobar las reglas de validación y los conflictos. La duración de la ejecución fue de 2,413 segundos, con una respuesta promedio de 30 ms. Los valores corresponden a esa ejecución local y no representan una prueba de rendimiento o de carga.
+
 ## Evolución del parcial
 
 Partiendo del código original, realicé las siguientes mejoras:
