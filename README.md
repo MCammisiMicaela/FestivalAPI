@@ -160,7 +160,7 @@ En Windows:
 .\mvnw.cmd test
 ```
 
-Los tests unitarios cubren creación de eventos, prevención de documentos duplicados, emisión de entradas, códigos duplicados, recursos inexistentes y validación de uso único de entradas QR. Además, existe una prueba de carga del contexto de Spring Boot. GitHub Actions ejecuta `mvnw verify` al publicar cambios.
+Las pruebas unitarias cubren creación de eventos, prevención de documentos duplicados, emisión de entradas, códigos repetidos, recursos inexistentes y uso único de entradas QR. Además, las **pruebas de integración con MockMvc y SQLite** recorren los endpoints HTTP: alta, consulta, edición y eliminación de eventos; emisión de entradas QR; validaciones y respuestas 400, 404 y 409. Una prueba adicional verifica que Spring Boot inicia correctamente. GitHub Actions ejecuta `mvnw verify` en cada cambio.
 
 ## Evolución del parcial
 
