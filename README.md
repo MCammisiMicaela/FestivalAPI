@@ -2,7 +2,7 @@
 
 **API REST para la gestión de festivales, eventos y entradas**
 
-Desarrollé FestivalAPI como parte de la materia Bases de Datos II. El proyecto comenzó en un parcial y después lo fui ampliando para completar las operaciones de la API, mejorar la organización del código y trabajar con las relaciones entre las entidades.
+Desarrollé FestivalAPI como parte de la materia Programación II. El proyecto comenzó en un parcial y después lo fui ampliando para completar las operaciones de la API, mejorar la organización del código y trabajar con las relaciones entre las entidades.
 
 La aplicación permite registrar **asistentes, organizadores y eventos**, y gestionar entradas de tipo **General, VIP y QR**. Está desarrollada con Java y Spring Boot, y utiliza SQLite para guardar la información.
 
