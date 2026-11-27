@@ -8,5 +8,5 @@ public record EntradaSolicitud(
         @NotNull @Positive Long asistenteId,
         @NotNull @Positive Long organizadorId,
         @NotNull @Positive Long eventoId,
-        @NotNull @DecimalMin(value = "0.01") BigDecimal precio,
+        @NotNull @DecimalMin(value = "0.01") @Digits(integer = 10, fraction = 2) BigDecimal precio,
         @NotBlank @Size(max = 40) String codigo) { }
