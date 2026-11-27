@@ -1,0 +1,188 @@
+{
+  "descripcion": "Datos ficticios para demostraciones locales de FestivalAPI. No contienen DNIs ni CUITs reales validados.",
+  "asistentes": [
+    {
+      "nombre": "Camila",
+      "apellido": "Rios",
+      "documento": "98000001",
+      "telefono": "3404000101"
+    },
+    {
+      "nombre": "Mateo",
+      "apellido": "Fernandez",
+      "documento": "98000002",
+      "telefono": "3404000102"
+    },
+    {
+      "nombre": "Valentina",
+      "apellido": "Acosta",
+      "documento": "98000003",
+      "telefono": "3404000103"
+    },
+    {
+      "nombre": "Bruno",
+      "apellido": "Lopez",
+      "documento": "98000004",
+      "telefono": "3404000104"
+    },
+    {
+      "nombre": "Lucia",
+      "apellido": "Vega",
+      "documento": "98000005",
+      "telefono": "3404000105"
+    },
+    {
+      "nombre": "Tomas",
+      "apellido": "Medina",
+      "documento": "98000006",
+      "telefono": "3404000106"
+    }
+  ],
+  "organizadores": [
+    {
+      "nombre": "Paula",
+      "apellido": "Sosa",
+      "documento": "99000001",
+      "empresa": "Producciones Litoral (Demo)",
+      "cuit": "20990000001"
+    },
+    {
+      "nombre": "Ignacio",
+      "apellido": "Torres",
+      "documento": "99000002",
+      "empresa": "Eventos del Parque (Demo)",
+      "cuit": "20990000002"
+    },
+    {
+      "nombre": "Florencia",
+      "apellido": "Luna",
+      "documento": "99000003",
+      "empresa": "Escenario Sur (Demo)",
+      "cuit": "20990000003"
+    }
+  ],
+  "eventos": [
+    {
+      "nombre": "Festival del Litoral (Demo)",
+      "descripcion": "Encuentro musical ficticio con bandas regionales y artistas invitados.",
+      "fechaRealizacion": "2027-03-13T20:00:00",
+      "lugar": "Predio Ferial Demo"
+    },
+    {
+      "nombre": "Rock al Atardecer (Demo)",
+      "descripcion": "Recital ficticio de rock con grupos locales e invitados.",
+      "fechaRealizacion": "2027-04-17T21:00:00",
+      "lugar": "Anfiteatro Demo"
+    },
+    {
+      "nombre": "Encuentro Indie (Demo)",
+      "descripcion": "Festival ficticio de musica alternativa y artistas emergentes.",
+      "fechaRealizacion": "2027-05-08T19:30:00",
+      "lugar": "Sala Principal Demo"
+    },
+    {
+      "nombre": "Noche Electronica (Demo)",
+      "descripcion": "Evento ficticio de musica electronica con varios escenarios.",
+      "fechaRealizacion": "2027-06-19T22:00:00",
+      "lugar": "Parque de Eventos Demo"
+    }
+  ],
+  "entradas": [
+    {
+      "tipo": "GENERAL",
+      "asistenteDocumento": "98000001",
+      "organizadorCuit": "20990000001",
+      "eventoNombre": "Festival del Litoral (Demo)",
+      "precio": 13500,
+      "codigo": "GEN-DEMO-001"
+    },
+    {
+      "tipo": "GENERAL",
+      "asistenteDocumento": "98000002",
+      "organizadorCuit": "20990000002",
+      "eventoNombre": "Rock al Atardecer (Demo)",
+      "precio": 15000,
+      "codigo": "GEN-DEMO-002"
+    },
+    {
+      "tipo": "GENERAL",
+      "asistenteDocumento": "98000003",
+      "organizadorCuit": "20990000003",
+      "eventoNombre": "Encuentro Indie (Demo)",
+      "precio": 12500,
+      "codigo": "GEN-DEMO-003"
+    },
+    {
+      "tipo": "GENERAL",
+      "asistenteDocumento": "98000004",
+      "organizadorCuit": "20990000001",
+      "eventoNombre": "Noche Electronica (Demo)",
+      "precio": 16000,
+      "codigo": "GEN-DEMO-004"
+    },
+    {
+      "tipo": "VIP",
+      "asistenteDocumento": "98000005",
+      "organizadorCuit": "20990000001",
+      "eventoNombre": "Festival del Litoral (Demo)",
+      "precio": 32500,
+      "codigo": "VIP-DEMO-001"
+    },
+    {
+      "tipo": "VIP",
+      "asistenteDocumento": "98000006",
+      "organizadorCuit": "20990000002",
+      "eventoNombre": "Rock al Atardecer (Demo)",
+      "precio": 35000,
+      "codigo": "VIP-DEMO-002"
+    },
+    {
+      "tipo": "VIP",
+      "asistenteDocumento": "98000001",
+      "organizadorCuit": "20990000003",
+      "eventoNombre": "Encuentro Indie (Demo)",
+      "precio": 28000,
+      "codigo": "VIP-DEMO-003"
+    },
+    {
+      "tipo": "VIP",
+      "asistenteDocumento": "98000002",
+      "organizadorCuit": "20990000001",
+      "eventoNombre": "Noche Electronica (Demo)",
+      "precio": 40000,
+      "codigo": "VIP-DEMO-004"
+    },
+    {
+      "tipo": "QR",
+      "asistenteDocumento": "98000003",
+      "organizadorCuit": "20990000001",
+      "eventoNombre": "Festival del Litoral (Demo)",
+      "precio": 14000,
+      "codigo": "QR-DEMO-001"
+    },
+    {
+      "tipo": "QR",
+      "asistenteDocumento": "98000004",
+      "organizadorCuit": "20990000002",
+      "eventoNombre": "Rock al Atardecer (Demo)",
+      "precio": 17500,
+      "codigo": "QR-DEMO-002"
+    },
+    {
+      "tipo": "QR",
+      "asistenteDocumento": "98000005",
+      "organizadorCuit": "20990000003",
+      "eventoNombre": "Encuentro Indie (Demo)",
+      "precio": 16000,
+      "codigo": "QR-DEMO-003"
+    },
+    {
+      "tipo": "QR",
+      "asistenteDocumento": "98000006",
+      "organizadorCuit": "20990000002",
+      "eventoNombre": "Noche Electronica (Demo)",
+      "precio": 19500,
+      "codigo": "QR-DEMO-004"
+    }
+  ]
+}
