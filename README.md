@@ -199,6 +199,13 @@ Además, probé la API con Postman usando una colección de **19 solicitudes HTT
 
 Podés importar la colección desde [`postman/FestivalAPI.postman_collection.json`](postman/FestivalAPI.postman_collection.json) y ejecutarla con la aplicación iniciada en `http://localhost:8080`.
 
+### Resultados de las pruebas en Postman
+
+![Resultados de la colección de Postman: 19 pruebas aprobadas, sin fallos ni errores](capturas/01-pruebas-postman.png)
+
+En la captura se ve el resultado de la ejecución completa de la colección, con las **19 pruebas aprobadas, 0 fallidas y 0 errores**.
+
+
 ## Autora
 
 **[Micaela Cammisi](https://github.com/MCammisiMicaela)**
