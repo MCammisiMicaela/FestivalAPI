@@ -1,0 +1,23 @@
+# Build y entorno local
+/target/
+.classpath
+.project
+.settings/
+.idea/
+.vscode/
+*.iml
+
+# SQLite: no publicar datos personales ni bases locales
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+/data/
+
+# Variables y credenciales
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store

@@ -1,0 +1,57 @@
+@base = http://localhost:8080
+
+### 1. Crear asistente (datos ficticios)
+POST {{base}}/api/asistentes
+Content-Type: application/json
+
+{
+  "nombre": "Ana",
+  "apellido": "Ejemplo",
+  "documento": "99999991",
+  "telefono": "0000000000"
+}
+
+### 2. Crear organizador (datos ficticios)
+POST {{base}}/api/organizadores
+Content-Type: application/json
+
+{
+  "nombre": "Juan",
+  "apellido": "Ejemplo",
+  "documento": "99999992",
+  "empresa": "Organizadora de prueba",
+  "cuit": "20999999999"
+}
+
+### 3. Crear evento
+POST {{base}}/api/eventos
+Content-Type: application/json
+
+{
+  "nombre": "Festival Demo",
+  "descripcion": "Concierto ficticio para probar la API REST",
+  "fechaRealizacion": "2027-06-15T20:00:00",
+  "lugar": "Anfiteatro Demo"
+}
+
+### 4. Crear entrada general. Reemplazar ids por los devueltos en las solicitudes anteriores.
+POST {{base}}/api/entradas
+Content-Type: application/json
+
+{
+  "tipo": "GENERAL",
+  "asistenteId": 1,
+  "organizadorId": 2,
+  "eventoId": 1,
+  "precio": 15000.00,
+  "codigo": "GEN-DEMO-001"
+}
+
+### 5. Listar entradas
+GET {{base}}/api/entradas
+
+### 6. Buscar organizador por CUIT
+GET {{base}}/api/organizadores/cuit/20999999999
+
+### 7. Registro de uso de un QR (solo con entrada de tipo QR)
+PATCH {{base}}/api/entradas/1/usar
