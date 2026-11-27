@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 import org.springframework.http.*;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -34,6 +35,12 @@ public class ManejadorErrores {
                 .map(err -> err.getField() + ": " + err.getDefaultMessage())
                 .distinct().collect(Collectors.joining("; "));
         return respuesta(HttpStatus.BAD_REQUEST, mensaje, req);
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<ErrorApi> parametroInvalido(MethodArgumentTypeMismatchException ex,
+                                                       HttpServletRequest req) {
+        return respuesta(HttpStatus.BAD_REQUEST, "Parametro invalido: " + ex.getName(), req);
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
