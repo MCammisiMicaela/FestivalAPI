@@ -36,7 +36,7 @@ public class AsistenteServicio {
 
     private void verificarDocumento(String documento, Long idActual) {
         personas.findByDocumento(documento).ifPresent(p -> {
-            if (!p.getId().equals(idActual)) throw new Conflicto("Ya existe una persona con ese documento");
+            if (idActual == null || !java.util.Objects.equals(p.getId(), idActual)) throw new Conflicto("Ya existe una persona con ese documento");
         });
     }
 
