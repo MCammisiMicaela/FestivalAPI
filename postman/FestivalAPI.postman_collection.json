@@ -140,7 +140,7 @@
         },
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"tipo\": \"GENERAL\",\n  \"asistenteId\": \"{{asistenteId}}\",\n  \"organizadorId\": \"{{organizadorId}}\",\n  \"eventoId\": \"{{eventoId}}\",\n  \"precio\": 1500,\n  \"codigo\": \"GENERAL-{{demoSufijo}}\"\n}",
+          "raw": "{\n  \"tipo\": \"GENERAL\",\n  \"asistenteId\": {{asistenteId}},\n  \"organizadorId\": {{organizadorId}},\n  \"eventoId\": {{eventoId}},\n  \"precio\": 1500,\n  \"codigo\": \"GENERAL-{{demoSufijo}}\"\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -177,7 +177,7 @@
         },
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"tipo\": \"VIP\",\n  \"asistenteId\": \"{{asistenteId}}\",\n  \"organizadorId\": \"{{organizadorId}}\",\n  \"eventoId\": \"{{eventoId}}\",\n  \"precio\": 3500,\n  \"codigo\": \"VIP-{{demoSufijo}}\"\n}",
+          "raw": "{\n  \"tipo\": \"VIP\",\n  \"asistenteId\": {{asistenteId}},\n  \"organizadorId\": {{organizadorId}},\n  \"eventoId\": {{eventoId}},\n  \"precio\": 3500,\n  \"codigo\": \"VIP-{{demoSufijo}}\"\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -214,7 +214,7 @@
         },
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"tipo\": \"QR\",\n  \"asistenteId\": \"{{asistenteId}}\",\n  \"organizadorId\": \"{{organizadorId}}\",\n  \"eventoId\": \"{{eventoId}}\",\n  \"precio\": 2000,\n  \"codigo\": \"QR-{{demoSufijo}}\"\n}",
+          "raw": "{\n  \"tipo\": \"QR\",\n  \"asistenteId\": {{asistenteId}},\n  \"organizadorId\": {{organizadorId}},\n  \"eventoId\": {{eventoId}},\n  \"precio\": 2000,\n  \"codigo\": \"QR-{{demoSufijo}}\"\n}",
           "options": {
             "raw": {
               "language": "json"
