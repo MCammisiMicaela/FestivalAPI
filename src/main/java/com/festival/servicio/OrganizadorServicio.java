@@ -40,7 +40,7 @@ public class OrganizadorServicio {
             if (idActual == null || !java.util.Objects.equals(p.getId(), idActual)) throw new Conflicto("Ya existe una persona con ese documento");
         });
         organizadores.findByCuit(cuit).ifPresent(o -> {
-            if (!o.getId().equals(idActual)) throw new Conflicto("Ya existe un organizador con ese CUIT");
+            if (idActual == null || !java.util.Objects.equals(o.getId(), idActual)) throw new Conflicto("Ya existe un organizador con ese CUIT");
         });
     }
 
