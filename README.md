@@ -146,6 +146,22 @@ Este JSON se envía mediante `POST /api/entradas`. Los identificadores son ilust
 
 El archivo [`examples/api.http`](examples/api.http) contiene solicitudes HTTP de ejemplo.
 
+### Datos ficticios para la demostración
+
+Para que la API pueda mostrar información sin crear cada registro a mano, incluimos un [archivo JSON de ejemplo](examples/datos-demo.json) y un [cargador para Windows PowerShell](examples/cargar-datos-demo.ps1).
+
+El conjunto contiene **6 asistentes, 3 organizadores, 4 eventos y 12 entradas** de tipo General, VIP y QR. Las identidades, empresas y documentos son ficticios; no representan personas ni entidades reales.
+
+Con el servidor iniciado en el puerto 8080, desde la carpeta principal del proyecto, ejecutá:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\examples\cargar-datos-demo.ps1
+```
+
+El script utiliza los endpoints REST y registra las relaciones con los **IDs devueltos por la API**. Los datos se guardan en el archivo SQLite local `festival.db`, que no se sube a GitHub. Es posible volver a ejecutar el script: identifica los ejemplos existentes por documento, CUIT, nombre de evento o código de entrada y evita crearlos de nuevo.
+
+Verificá los resultados en `GET /api/asistentes`, `GET /api/organizadores`, `GET /api/eventos` y `GET /api/entradas`.
+
 ### Verificación manual con Postman
 
 Incluí la colección [`postman/FestivalAPI.postman_collection.json`](postman/FestivalAPI.postman_collection.json) con **19 solicitudes** organizadas en el orden recomendado de ejecución.
