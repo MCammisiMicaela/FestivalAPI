@@ -123,4 +123,124 @@ class FestivalApiIntegracionTest {
         mvc.perform(patch(rutaEntrada + "/usar"))
                 .andExpect(status().isConflict());
     }
+
+    @Test
+    void gestionaEntradasGeneralesYVipYProtegeLasRelaciones() throws Exception {
+        Long asistenteId = extraerId(crearYObtenerRuta("/api/asistentes", """
+                {"nombre":"Lucia","apellido":"Prueba","documento":"91999991","telefono":"1111111"}
+                """));
+        Long organizadorId = extraerId(crearYObtenerRuta("/api/organizadores", """
+                {"nombre":"Pablo","apellido":"Prueba","documento":"91999992",
+                 "empresa":"Organizacion ficticia","cuit":"20999999991"}
+                """));
+        Long eventoId = extraerId(crearYObtenerRuta("/api/eventos", """
+                {"nombre":"Festival General y VIP","descripcion":"Escenario de prueba",
+                 "fechaRealizacion":"2027-07-01T18:00:00","lugar":"Escenario de prueba"}
+                """));
+
+        String datosGeneral = """
+                {"tipo":"GENERAL","asistenteId":%d,"organizadorId":%d,"eventoId":%d,
+                 "precio":1800.00,"codigo":"GENERAL-INTEGRACION"}
+                """.formatted(asistenteId, organizadorId, eventoId);
+        String datosVip = """
+                {"tipo":"VIP","asistenteId":%d,"organizadorId":%d,"eventoId":%d,
+                 "precio":4500.00,"codigo":"VIP-INTEGRACION"}
+                """.formatted(asistenteId, organizadorId, eventoId);
+        String rutaGeneral = crearYObtenerRuta("/api/entradas", datosGeneral);
+        String rutaVip = crearYObtenerRuta("/api/entradas", datosVip);
+
+        mvc.perform(get(rutaGeneral)).andExpect(status().isOk())
+                .andExpect(jsonPath("$.tipo").value("GENERAL"));
+        mvc.perform(get(rutaVip)).andExpect(status().isOk())
+                .andExpect(jsonPath("$.tipo").value("VIP"));
+        mvc.perform(get("/api/entradas")).andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(2));
+
+        mvc.perform(patch(rutaGeneral + "/precio")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"precio\":2200.50}"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.precio").value(2200.50));
+        mvc.perform(patch(rutaGeneral + "/precio")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"precio\":12.345}"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.estado").value(400));
+        mvc.perform(patch(rutaVip + "/usar"))
+                .andExpect(status().isConflict());
+
+        mvc.perform(delete("/api/asistentes/" + asistenteId))
+                .andExpect(status().isConflict());
+        mvc.perform(delete("/api/organizadores/" + organizadorId))
+                .andExpect(status().isConflict());
+        mvc.perform(delete("/api/eventos/" + eventoId))
+                .andExpect(status().isConflict());
+
+        mvc.perform(delete(rutaGeneral)).andExpect(status().isNoContent());
+        mvc.perform(delete(rutaVip)).andExpect(status().isNoContent());
+        mvc.perform(delete("/api/eventos/" + eventoId)).andExpect(status().isNoContent());
+        mvc.perform(delete("/api/asistentes/" + asistenteId)).andExpect(status().isNoContent());
+        mvc.perform(delete("/api/organizadores/" + organizadorId)).andExpect(status().isNoContent());
+    }
+
+    @Test
+    void evitaDuplicadosDeDocumentosYCuitsEnLaBaseReal() throws Exception {
+        crearYObtenerRuta("/api/asistentes", """
+                {"nombre":"A","apellido":"Prueba","documento":"91999981","telefono":"1111111"}
+                """);
+        mvc.perform(post("/api/organizadores")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {"nombre":"B","apellido":"Prueba","documento":"91999981",
+                                 "empresa":"Empresa Demo","cuit":"20999999981"}
+                                """))
+                .andExpect(status().isConflict())
+                .andExpect(jsonPath("$.estado").value(409));
+
+        String rutaOrganizador = crearYObtenerRuta("/api/organizadores", """
+                {"nombre":"C","apellido":"Prueba","documento":"91999982",
+                 "empresa":"Empresa Demo","cuit":"20999999982"}
+                """);
+        mvc.perform(post("/api/organizadores")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {"nombre":"D","apellido":"Prueba","documento":"91999983",
+                                 "empresa":"Otra empresa","cuit":"20999999982"}
+                                """))
+                .andExpect(status().isConflict());
+
+        mvc.perform(get("/api/organizadores/cuit/20999999982"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(extraerId(rutaOrganizador).intValue()));
+    }
+
+    @Test
+    void validaPrecioLimitesYTiposDeDatosEnHttp() throws Exception {
+        mvc.perform(post("/api/entradas")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {"tipo":"GENERAL","asistenteId":1,"organizadorId":2,"eventoId":3,
+                                 "precio":99999999999.99,"codigo":"CODIGO-EXCESIVO"}
+                                """))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.estado").value(400));
+        mvc.perform(post("/api/entradas")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {"tipo":"GENERAL","asistenteId":1,"organizadorId":2,"eventoId":3,
+                                 "precio":1.001,"codigo":"CODIGO-DECIMALES"}
+                                """))
+                .andExpect(status().isBadRequest());
+        mvc.perform(post("/api/entradas")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {"tipo":"FALSIFICADA","asistenteId":1,"organizadorId":2,"eventoId":3,
+                                 "precio":100,"codigo":"CODIGO-TIPO"}
+                                """))
+                .andExpect(status().isBadRequest());
+        mvc.perform(get("/api/eventos/no-es-numero"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.estado").value(400));
+    }
+
 }

@@ -144,7 +144,20 @@ Primero se crean un asistente, un organizador y un evento. Con sus identificador
 
 Este JSON se envía mediante `POST /api/entradas`. Los identificadores son ilustrativos y pueden variar según los registros creados.
 
-El archivo [`examples/api.http`](examples/api.http) contiene una secuencia de solicitudes para practicar con Postman, Insomnia o un cliente HTTP compatible.
+El archivo [`examples/api.http`](examples/api.http) contiene solicitudes HTTP de ejemplo.
+
+### Verificación manual con Postman
+
+Incluí la colección [`postman/FestivalAPI.postman_collection.json`](postman/FestivalAPI.postman_collection.json) con **19 solicitudes** organizadas en el orden recomendado de ejecución.
+
+1. Iniciá la aplicación localmente con `./mvnw spring-boot:run` (en Windows, `.\mvnw.cmd spring-boot:run`).
+2. Abrí Postman y elegí **Import**. Seleccioná el archivo de la colección.
+3. Comprobá que la variable `baseUrl` tenga el valor `http://localhost:8080`.
+4. Abrí el **Collection Runner** y ejecutá las solicitudes en su orden original.
+
+La colección crea registros con **datos ficticios**, guarda automáticamente sus identificadores y después comprueba consultas, cambios de precio, uso único de QR, errores esperados (400/409) y eliminación de registros. Algunas solicitudes deben devolver 400 o 409: **son comprobaciones previstas, no fallos de la API**.
+
+> Se trata de un backend académico de demostración: no hay autenticación, autorización ni pagos reales. Usá exclusivamente datos de prueba, nunca información personal real.
 
 ## Pruebas
 
@@ -160,7 +173,7 @@ En Windows:
 .\mvnw.cmd test
 ```
 
-Las pruebas unitarias cubren creación de eventos, prevención de documentos duplicados, emisión de entradas, códigos repetidos, recursos inexistentes y uso único de entradas QR. Además, las **pruebas de integración con MockMvc y SQLite** recorren los endpoints HTTP: alta, consulta, edición y eliminación de eventos; emisión de entradas QR; validaciones y respuestas 400, 404 y 409. Una prueba adicional verifica que Spring Boot inicia correctamente. GitHub Actions ejecuta `mvnw verify` en cada cambio.
+Las pruebas unitarias cubren creación de eventos, prevención de documentos duplicados, emisión de entradas, códigos repetidos, recursos inexistentes y uso único de entradas QR. Además, las **pruebas de integración con MockMvc y SQLite** recorren los endpoints HTTP: CRUD de eventos; entradas General, VIP y QR; actualización de precios; relaciones y restricciones de eliminación; documentos y CUIT duplicados; validaciones y respuestas 400, 404 y 409. Una prueba adicional verifica que Spring Boot inicia correctamente. GitHub Actions ejecuta `mvnw verify` en cada cambio.
 
 ## Evolución del parcial
 
@@ -172,7 +185,7 @@ Partiendo del código original, realicé las siguientes mejoras:
 - Separación entre controladores, servicios, repositorios, DTOs y entidades.
 - Unificación de los tipos de entradas bajo `/api/entradas`.
 - Tratamiento del precio con `BigDecimal` y del teléfono como `String`.
-- Validación de solicitudes y manejo centralizado de errores.
+- Validación de solicitudes, precisión de importes y manejo centralizado de errores (incluidos los identificadores no numéricos).
 - Incorporación de métodos de actualización, baja y registro de uso de QR.
 - Exclusión de la base de datos original y los archivos generados del repositorio público.
 
